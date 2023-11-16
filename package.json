@@ -1,0 +1,30 @@
+{
+  "name": "tg-hw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn tsc",
+    "start": "node dist/main.js",
+    "postbuild": "copyfiles -u 1 src/locales/*.ftl dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "volta": {
+    "node": "18.18.0",
+    "yarn": "1.22.21"
+  },
+  "devDependencies": {
+    "@types/node": "18.18.0",
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@grammyjs/i18n": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "grammy": "^1.19.2",
+    "zod": "^3.22.4"
+  }
+}
