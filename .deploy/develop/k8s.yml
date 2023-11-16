@@ -1,0 +1,41 @@
+##### start backend block #######
+apiVersion: v1
+kind: Service
+metadata:
+  name: $CI_PROJECT_NAME-service
+  labels:
+    app: $CI_PROJECT_NAME
+  namespace: $NAME_PROJECT-$CI_COMMIT_REF_NAME
+spec:
+  selector:
+    app: $CI_PROJECT_NAME
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $CI_PROJECT_NAME
+  namespace: $NAME_PROJECT-$CI_COMMIT_REF_NAME
+spec:
+  selector:
+    matchLabels:
+      app: $CI_PROJECT_NAME
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: $CI_PROJECT_NAME
+    spec:
+      containers:
+        - name: $CI_PROJECT_NAME
+          image: $HARBOR_REPO/$NAME_PROJECT/$TAG_IMAGE-$CI_COMMIT_BRANCH:$CI_COMMIT_SHORT_SHA
+          resources:
+            requests:
+              memory: "64M"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+      enableServiceLinks: false
+      imagePullSecrets:
+        - name: $NAME_PROJECT-harbor-robot
+##### END BACKEND BLOCK #####
