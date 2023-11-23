@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "yarn tsc",
     "start": "node dist/main.js",
-    "postbuild": "copyfiles -u 1 src/locales/*.ftl dist"
+    "postbuild": "copyfiles -u 1 src/locales/*.ftl dist",
+    "prebuild": "rm -rf dist"
   },
   "keywords": [],
   "author": "",
