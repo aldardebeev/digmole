@@ -1,15 +1,4 @@
 ##### start backend block #######
-apiVersion: v1
-kind: Service
-metadata:
-  name: $CI_PROJECT_NAME-service
-  labels:
-    app: $CI_PROJECT_NAME
-  namespace: $NAME_PROJECT-$CI_COMMIT_REF_NAME
-spec:
-  selector:
-    app: $CI_PROJECT_NAME
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
