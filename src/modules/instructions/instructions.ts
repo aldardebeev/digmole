@@ -17,11 +17,15 @@ linkModule.command(INSTRUCTIONS_COMMAND, async (ctx) => {
 })
 
 linkModule.callbackQuery(connectMetamask, async (ctx) => {
-    await ctx.answerCallbackQuery('https://telegra.ph/Podklyuchenie-MetaMask-11-30');
+    await ctx.answerCallbackQuery({
+        text: 'https://telegra.ph/Podklyuchenie-MetaMask-11-30',
+    });
 })
 
 linkModule.callbackQuery(linkTelegramAccount, async (ctx) => {
-    await ctx.answerCallbackQuery('https://telegra.ph/Privyazka-akkaunta-k-Telegram-11-30');
+    await ctx.answerCallbackQuery({
+        text: 'https://telegra.ph/Privyazka-akkaunta-k-Telegram-11-30',
+    });
 })
 
 export default linkModule;
