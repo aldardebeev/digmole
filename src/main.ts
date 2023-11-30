@@ -32,6 +32,7 @@ async function setupCommands(bot: Bot<ContextWithI18n, Api<RawApi>>) {
   await bot.api.setMyCommands([
     { command: START_COMMAND, description: "Запустить бота" },
     { command: COMMAND_PLAY_GAME, description: "Начать игру" },
+    { command: INSTRUCTIONS_COMMAND, description: "Инструкции" },
   ]);
 
   console.log("Setup commands");
