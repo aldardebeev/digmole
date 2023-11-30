@@ -26,6 +26,8 @@ gameModule.on("callback_query:game_short_name", (ctx) => {
 
   url.searchParams.append("hash", hash);
 
+  console.log(ctx.from.id, url.toString());
+
   return ctx.answerCallbackQuery({
     url: url.toString(),
   });

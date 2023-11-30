@@ -5,7 +5,7 @@ import { ContextWithI18n } from "../../types/context-with-i18n";
 const startModule = new Composer<ContextWithI18n>();
 
 startModule.command(START_COMMAND, async (ctx) => {
-    ctx.reply('Hello!')
+    ctx.reply('Привет!')
 })
 
 export default startModule;
