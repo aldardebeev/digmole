@@ -7,5 +7,4 @@ import linkModule from "./instructions/instructions";
 export const modules: Composer<ContextWithI18n>[] = [
     startModule,
     gameModule,
-    linkModule,
 ];
