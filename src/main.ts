@@ -1,4 +1,4 @@
-import { Api, Bot, Composer, RawApi } from "grammy";
+import { Api, Bot, Composer, RawApi, Keyboard } from "grammy";
 import { COMMAND_PLAY_GAME, INSTRUCTIONS_COMMAND, START_COMMAND } from "./utils/commands";
 import { I18n } from "@grammyjs/i18n";
 import { ContextWithI18n } from "./types/context-with-i18n";

@@ -1,2 +1,0 @@
-include:
-  - remote: "https://gitlab.smartworld.team/incude/ci-cd-pipeline/-/raw/main/dex2/tg-bot/.gitlab-ci.yml"
