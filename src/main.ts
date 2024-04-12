@@ -1,5 +1,5 @@
 import { Api, Bot, Composer, RawApi, Keyboard } from "grammy";
-import { COMMAND_PLAY_GAME, INSTRUCTIONS_COMMAND, START_COMMAND } from "./utils/commands";
+import { START_COMMAND } from "./utils/commands";
 import { I18n } from "@grammyjs/i18n";
 import { ContextWithI18n } from "./types/context-with-i18n";
 import { modules } from "./modules";
@@ -31,8 +31,6 @@ function setupI18N(bot: Bot<ContextWithI18n, Api<RawApi>>) {
 async function setupCommands(bot: Bot<ContextWithI18n, Api<RawApi>>) {
   await bot.api.setMyCommands([
     { command: START_COMMAND, description: "Запустить бота" },
-    { command: COMMAND_PLAY_GAME, description: "Начать игру" },
-    { command: INSTRUCTIONS_COMMAND, description: "Инструкции" },
   ]);
 
   console.log("Setup commands");

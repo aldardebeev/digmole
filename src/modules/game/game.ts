@@ -1,9 +1,11 @@
 import { Composer } from "grammy";
-import { COMMAND_PLAY_GAME } from "../../utils/commands";
 import { ContextWithI18n } from "../../types/context-with-i18n";
 import { config } from "../../config/config";
 import { URL } from "url";
 import crypto from "crypto";
+import queueGame from "../queues/queues";
+import { randomUUID } from "crypto";
+import { EQueue } from "../../libs/queues/queue.enum"
 
 const gameModule = new Composer<ContextWithI18n>();
 
@@ -33,8 +35,10 @@ gameModule.on("callback_query:game_short_name", (ctx) => {
   });
 });
 
-gameModule.command(COMMAND_PLAY_GAME, (ctx) =>
-  ctx.replyWithGame(config.APP_CCG_GAME_NAME, {})
-);
+
+gameModule.hears("Начать игру", async (ctx) => {
+  const job = await queueGame(EQueue.START_GAME_SESSION).add(randomUUID(), { chatID: ctx.chat.id, amount: '12' });
+  console.log(job)
+});
 
 export default gameModule;
