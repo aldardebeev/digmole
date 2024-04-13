@@ -1,4 +1,4 @@
-import { Composer } from "grammy";
+import { Composer, InlineKeyboard } from "grammy";
 import { ContextWithI18n } from "../../types/context-with-i18n";
 import { config } from "../../config/config";
 import { URL } from "url";
@@ -6,6 +6,7 @@ import crypto from "crypto";
 import queueGame from "../queues/queues";
 import { randomUUID } from "crypto";
 import { EQueue } from "../../libs/queues/queue.enum"
+import { EKeyaboard } from "../../libs/keyboard.enum"
 
 const gameModule = new Composer<ContextWithI18n>();
 
@@ -36,9 +37,23 @@ gameModule.on("callback_query:game_short_name", (ctx) => {
 });
 
 
-gameModule.hears("Начать игру", async (ctx) => {
-  const job = await queueGame(EQueue.START_GAME_SESSION).add(randomUUID(), { chatID: ctx.chat.id, amount: '12' });
-  console.log(job)
+gameModule.hears(EKeyaboard.START_GAME, async (ctx) => {
+  const inlineKeyboard = new InlineKeyboard().text('100').text('200').row().text('300').text('400')
+  await ctx.reply('Выберите ставку:', {
+    reply_markup: inlineKeyboard
+  });
 });
 
+gameModule.on('callback_query:data', async (ctx) => {
+   const job = await queueGame(EQueue.START_GAME_SESSION).add(randomUUID(), { amount: ctx.callbackQuery.data });
+   await ctx.answerCallbackQuery();
+});
+
+gameModule.hears(EKeyaboard.REPLISHMENT_WALLET, async (ctx) => {
+  const job = await queueGame(EQueue.REPLISHMENT_WALLET).add(randomUUID(), { chatID: ctx.chat.id, amount: '12' });
+});
+
+gameModule.hears(EKeyaboard.RULE_GAME, async (ctx) => {
+  await ctx.reply('Правила игры: \nБла Бла Бла...')
+});
 export default gameModule;
