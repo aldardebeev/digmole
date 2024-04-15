@@ -1,26 +1,37 @@
-import { Worker } from "bullmq";
-import { EQueue } from "../../libs/queues/queue.enum"
-// Redis connection details
-const workerConnectionOptions = {
-    port: 6223,
-    host: 'localhost',
-    password: 'eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81',
-    db: 2,
-};
+import { Job, RedisOptions, Worker } from "bullmq";
+import { EQueue } from "../../libs/queues/queue.enum";
 
-const workerInstance = new Worker(EQueue.START_BOT, workerJobHandler, {
-    connection: workerConnectionOptions,
-});
+export class NotificationWorker {
+    private readonly subscribersMap: Record<string, Function[]> = {};
+    private worker?: Worker<any, any, string>;
+    private redisOptions: RedisOptions;
 
-// The `workerJobHandler` function is the function that will be called
-// when a job is added to the queue. It will receive the job as an argument.
-// The job will contain the data that was added to the queue when the job
-// was created.
-async function workerJobHandler(job) {
-    console.log(`handling job: [${job.id}]`);
-    console.log({ jobName: job.name, jobId: job.id, data: job.data });
+    constructor(connectionOptions: RedisOptions) {
+        this.redisOptions = connectionOptions;
+    }
 
-    // for example:
-    // await processUploadedFile(job.data.fileId)
-    return;
+    private async handle(job: Job): Promise<void> {
+        const callbacks = this.subscribersMap[job.data.message];
+        console.log(this.subscribersMap, callbacks);
+        for (const callback of callbacks) {
+            await callback(job);
+        }
+    }
+
+    public subscribe(messageType: string, callback: Function) {
+
+        if (!this.subscribersMap[messageType]) {
+            console.log('Create array');
+            this.subscribersMap[messageType] = [];
+        }
+
+        console.log('Push hand');
+        this.subscribersMap[messageType].push(callback);
+    }
+
+    public start() {
+        this.worker = new Worker(EQueue.NOTIFICATION, async (job: Job) => {
+            this.handle(job);
+        }, { connection: this.redisOptions });
+    }
 }

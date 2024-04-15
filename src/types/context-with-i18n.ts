@@ -1,4 +1,5 @@
+import { ConversationFlavor } from "@grammyjs/conversations";
 import { I18nFlavor } from "@grammyjs/i18n";
-import { Context } from "grammy";
+import { Context, SessionFlavor } from "grammy";
 
-export type ContextWithI18n = Context & I18nFlavor;
+export type CustomContext = Context & I18nFlavor & SessionFlavor<{}> & ConversationFlavor;

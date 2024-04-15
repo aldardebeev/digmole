@@ -1,9 +1,9 @@
 import { Composer, InlineKeyboard, Keyboard } from "grammy";
 import { INSTRUCTIONS_COMMAND } from "../../utils/commands";
-import { ContextWithI18n } from "../../types/context-with-i18n";
+import { CustomContext } from "../../types/context-with-i18n";
 import { Menu } from "@grammyjs/menu";
 
-const linkModule = new Composer<ContextWithI18n>();
+const linkModule = new Composer<CustomContext>();
 
 const connectMetamask = 'connect_metamask';
 const linkTelegramAccount = 'link_telegram_account';

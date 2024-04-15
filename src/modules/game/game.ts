@@ -1,14 +1,14 @@
 import { Composer, InlineKeyboard } from "grammy";
-import { ContextWithI18n } from "../../types/context-with-i18n";
+import { CustomContext } from "../../types/context-with-i18n";
 import { config } from "../../config/config";
 import { URL } from "url";
 import crypto from "crypto";
-import queueGame from "../queues/queues";
+import { queueGame } from "../queues/queues";
 import { randomUUID } from "crypto";
 import { EQueue } from "../../libs/queues/queue.enum"
 import { EKeyaboard } from "../../libs/keyboard.enum"
 
-const gameModule = new Composer<ContextWithI18n>();
+const gameModule = new Composer<CustomContext>();
 
 gameModule.on("callback_query:game_short_name", (ctx) => {
   const url = new URL(config.APP_GAME_CLIENT_URL);
