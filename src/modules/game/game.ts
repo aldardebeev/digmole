@@ -2,11 +2,11 @@ import { Composer, InlineKeyboard } from "grammy";
 import { CustomContext } from "../../types/context-with-i18n";
 import { config } from "../../config/config";
 import { URL } from "url";
-import crypto from "crypto";
+import crypto, { randomUUID } from "crypto";
+import { EMainKeyaboard } from "../../libs/keyboards/main-keyboard.enum"
 import { queueGame } from "../queues/queues";
-import { randomUUID } from "crypto";
-import { EQueue } from "../../libs/queues/queue.enum"
-import { EKeyaboard } from "../../libs/keyboard.enum"
+import { EQueue } from "../../libs/queues/queue.enum";
+import { ECalbackQuery } from "../../libs/callback-query-enum";
 
 const gameModule = new Composer<CustomContext>();
 
@@ -36,24 +36,31 @@ gameModule.on("callback_query:game_short_name", (ctx) => {
   });
 });
 
-
-gameModule.hears(EKeyaboard.START_GAME, async (ctx) => {
-  const inlineKeyboard = new InlineKeyboard().text('100').text('200').row().text('300').text('400')
-  await ctx.reply('Выберите ставку:', {
-    reply_markup: inlineKeyboard
-  });
+gameModule.hears(EMainKeyaboard.START_GAME, async (ctx) => {
+  await queueGame(EQueue.AVAILABLE_AMOUNT).add(randomUUID(), { chatId: ctx.chat!.id });
 });
 
-gameModule.on('callback_query:data', async (ctx) => {
-   const job = await queueGame(EQueue.START_GAME_SESSION).add(randomUUID(), { amount: ctx.callbackQuery.data });
-   await ctx.answerCallbackQuery();
+gameModule.hears(EMainKeyaboard.RULE_GAME, async (ctx) => {
+  await ctx.reply(`Правила игры:
+  - Привяжи кошелек и выбери ставку в игре 
+  - На основании Tx транзакции в блокчейне UMI генерируются две карты и отображаются пользователю
+  - Точно по такому же принципу генерируются две карты для бота
+  - Путем суммирования количества набранных очков выявляется победитель, отображение количества очков в классическом сценарии - Туз считается за 11 очков
+  - Если же количество очков одинаковое, то поставленные монеты возвращаются игрокам
+  `)
 });
 
-gameModule.hears(EKeyaboard.REPLISHMENT_WALLET, async (ctx) => {
-  const job = await queueGame(EQueue.REPLISHMENT_WALLET).add(randomUUID(), { chatID: ctx.chat.id, amount: '12' });
+const callbackQueries = [
+  ECalbackQuery.START_GAME100,
+  ECalbackQuery.START_GAME300,
+  ECalbackQuery.START_GAME500,
+  ECalbackQuery.START_GAME1000
+];
+
+gameModule.callbackQuery(callbackQueries, async (ctx) => {
+  await queueGame(EQueue.START_GAME).add(randomUUID(), { chatId: ctx.chat!.id, amount: ctx.callbackQuery.data });
+  await ctx.answerCallbackQuery({text: 'Игра началась!'});
 });
 
-gameModule.hears(EKeyaboard.RULE_GAME, async (ctx) => {
-  await ctx.reply('Правила игры: \nБла Бла Бла...')
-});
+
 export default gameModule;
