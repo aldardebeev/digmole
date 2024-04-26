@@ -11,7 +11,7 @@ export class NotificationWorker {
     }
 
     private async handle(job: Job): Promise<void> {
-        const callbacks = this.subscribersMap[job.data.message];
+        const callbacks = this.subscribersMap[job.data.messageType];
         console.log(this.subscribersMap, callbacks);
         for (const callback of callbacks) {
             await callback(job);
@@ -19,7 +19,6 @@ export class NotificationWorker {
     }
 
     public subscribe(messageType: string, callback: Function) {
-
         if (!this.subscribersMap[messageType]) {
             console.log('Create array');
             this.subscribersMap[messageType] = [];
