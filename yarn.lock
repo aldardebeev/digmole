@@ -48,6 +48,11 @@
   resolved "https://registry.yarnpkg.com/@grammyjs/menu/-/menu-1.2.1.tgz#4c29c10374ec2974ba9c158fda96f5129fb331fd"
   integrity sha512-0LV9A/UukfF46N0ceSqG1RbdCjhvB2u1MNHNkE7eRD3GVlffOBnR+MS2ESE9mSBleT9OjRV6imA7QZ57QBktOQ==
 
+"@grammyjs/storage-redis@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@grammyjs/storage-redis/-/storage-redis-2.4.2.tgz#fd64ce6853f538a55f7eb35420af8a2821365894"
+  integrity sha512-LAFQJ0C9AeEQwk/sY2UDxNctGGrRGf0NZeXVNuY6Q3S6drWWrQp4fUoSuQkhzGVtjFTT5BSHm7nfYAaWx81X1A==
+
 "@grammyjs/types@3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@grammyjs/types/-/types-3.3.0.tgz#04cf44943c789635a8e7dcd37846a962d57fb14f"
@@ -109,6 +114,13 @@
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/@types/http-cache-semantics/-/http-cache-semantics-4.0.4.tgz#b979ebad3919799c979b17c72621c0bc0a31c6c4"
   integrity sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==
+
+"@types/ioredis@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ioredis/-/ioredis-5.0.0.tgz#c1ea7e2f3e2c5a942a27cfee6f62ddcfb23fb3e7"
+  integrity sha512-zJbJ3FVE17CNl5KXzdeSPtdltc4tMT3TzC6fxQS0sQngkbFZ6h+0uTafsRqu+eSLIugf6Yb0Ea0SUuRr42Nk9g==
+  dependencies:
+    ioredis "*"
 
 "@types/node@18.18.0":
   version "18.18.0"
@@ -664,7 +676,7 @@ inherits@2, inherits@2.0.4, inherits@^2.0.1, inherits@~2.0.1, inherits@~2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-ioredis@^5.3.2:
+ioredis@*, ioredis@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-5.3.2.tgz#9139f596f62fc9c72d873353ac5395bcf05709f7"
   integrity sha512-1DKMMzlIHM02eBBVOFQ1+AolGjs6+xEcM4PDL7NqOS6szq7H9jSaEkIUH6/a5Hl241LzW6JLSiAbNvTQjUupUA==
