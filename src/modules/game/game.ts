@@ -7,6 +7,8 @@ import { EMainKeyaboard } from "../../libs/keyboards/main-keyboard.enum"
 import { queueGame } from "../queues/queues";
 import { EQueue } from "../../libs/queues/queue.enum";
 import { ECalbackQuery } from "../../libs/callback-query-enum";
+import { ReGameKeyboard } from "../../libs/keyboards/re-game-keyboard.enum copy";
+import { RuleGameText } from "../../libs/texts/rule-game-text";
 
 const gameModule = new Composer<CustomContext>();
 
@@ -40,14 +42,13 @@ gameModule.hears(EMainKeyaboard.START_GAME, async (ctx) => {
   await queueGame(EQueue.AVAILABLE_AMOUNT).add(randomUUID(), { chatId: ctx.chat!.id });
 });
 
+gameModule.callbackQuery('reGame', async (ctx) => {
+  await queueGame(EQueue.AVAILABLE_AMOUNT).add(randomUUID(), { chatId: ctx.chat!.id });
+  await ctx.answerCallbackQuery();
+});
+
 gameModule.hears(EMainKeyaboard.RULE_GAME, async (ctx) => {
-  await ctx.reply(`Правила игры:
-  - Привяжи кошелек и выбери ставку в игре 
-  - На основании Tx транзакции в блокчейне UMI генерируются две карты и отображаются пользователю
-  - Точно по такому же принципу генерируются две карты для бота
-  - Путем суммирования количества набранных очков выявляется победитель, отображение количества очков в классическом сценарии - Туз считается за 11 очков
-  - Если же количество очков одинаковое, то поставленные монеты возвращаются игрокам
-  `)
+  await ctx.reply(RuleGameText)
 });
 
 const callbackQueries = [

@@ -14,10 +14,8 @@ const rodRegExp = new RegExp(/rod/gmi);
 const linkWalletModule = new Composer<CustomContext>();
 
 async function askWallet(conversation: Conversation<CustomContext>, ctx: CustomContext) {
-    console.log('Enter in conversation');
 
-    await ctx.reply(' Отправьте адрес кошелька, который хотите привязать.\nАдрес должен начинаться с rod', {
-    });
+    await ctx.reply('Отправьте адрес кошелька, который хотите привязать.\nАдрес должен начинаться с rod',{} );
 
     const messageWithAddress = await conversation.waitForHears(rodRegExp);
     

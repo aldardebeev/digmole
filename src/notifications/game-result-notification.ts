@@ -5,6 +5,7 @@ import { Job } from "bullmq";
 import {
     type Conversation,
 } from "@grammyjs/conversations";
+import { ReGameKeyboard } from "../libs/keyboards/re-game-keyboard.enum copy";
 
 export class GameResultNotification {
     private readonly messageType = 'gameResult';
@@ -22,7 +23,7 @@ export class GameResultNotification {
         await this.bot.api.sendPhoto(job.data.chatId, `https://deckofcardsapi.com/static/img/${job.data.botCard1.replace("-", "")}.png`, { caption:  `Выпала карта` });
         await this.bot.api.sendPhoto(job.data.chatId, `https://deckofcardsapi.com/static/img/${job.data.botCard2.replace("-", "")}.png`, { caption: 'Выпала карта' });
 
-        const winnerMessage = job.data.winner === 'draw' ? 'Ничья' : job.data.winner === 'user' ? 'Вы выиграли' : 'Вы проиграли';
-        await this.bot.api.sendMessage(job.data.chatId,winnerMessage);
+        const winnerMessage = job.data.winner === 'draw' ? `Ничья\nСумма очков: ${job.data.userCardValue} = ${job.data.botCardValue}` : job.data.winner === 'user' ? `Вы выиграли\nСумма очков: ${job.data.userCardValue} > ${job.data.botCardValue}` : `Вы проиграли\nСумма очков: ${job.data.userCardValue} < ${job.data.botCardValue}`;
+        await this.bot.api.sendMessage(job.data.chatId, winnerMessage, {  reply_markup: ReGameKeyboard, });
     }
 }

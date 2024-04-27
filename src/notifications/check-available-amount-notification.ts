@@ -10,6 +10,8 @@ import { IsLinkWalletKeyboard } from "../libs/keyboards/is-link-wallet-keyboard.
 import { notLinkWalletGameText } from "../libs/texts/game/not-link-wallet-game-text copy";
 import { notAvailableAmountText } from "../libs/texts/game/not-available-amount-text";
 import { GameBetKeyboard } from "../libs/keyboards/game-bet-keyboard.enum";
+import { notAwailableAmountKeyboard } from "../libs/keyboards/not-available-amount-keyboard.enum";
+import { config } from "../config/config";
 
 export class CheckAvailableAmountNotification {
     private readonly messageType = 'checkAvailableAmount';
@@ -18,12 +20,18 @@ export class CheckAvailableAmountNotification {
     }
 
     async handle(job: Job, conversation: Conversation<CustomContext>) {
-        if(job.data.isLink){
-            job.data.availableAmount 
-            ? this.bot.api.sendMessage(job.data.chatId,  "Выберите ставку", {  reply_markup: GameBetKeyboard  }) 
-            : this.bot.api.sendMessage(job.data.chatId,  notAvailableAmountText, {  reply_markup: IsLinkWalletKeyboard  }) 
-        }else{
-            this.bot.api.sendMessage(job.data.chatId,  notLinkWalletGameText, {  reply_markup: NotLinkWalletKeyboard, });
+        if (job.data.isLink) {
+            job.data.availableAmount
+                ? this.bot.api.sendMessage(job.data.chatId, "Выберите ставку", { reply_markup: GameBetKeyboard })
+
+                : await this.bot.api.sendMessage(job.data.chatId, `Для запуска игры необходимо пополнить доступный баланс на 100 ROD
+Для этого переведите токены ROD с вашего привязанного торгового адреса на следующий 👇:`,)
+            await this.bot.api.sendMessage(job.data.chatId, config.HOT_ADDRESS)
+            await this.bot.api.sendMessage(job.data.chatId, `🔴 ВНИМАНИЕ! переводите монеты только из привязанного кошелька UMI Wallet.
+НЕ ПЕРЕВОДИТЕ монеты с биржи sigen.pro напрямую в игру`, { reply_markup: notAwailableAmountKeyboard })
+
+        } else {
+            this.bot.api.sendMessage(job.data.chatId, notLinkWalletGameText, { reply_markup: NotLinkWalletKeyboard, });
         }
 
     }

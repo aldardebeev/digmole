@@ -1,9 +1,10 @@
 import { Worker, Queue, Job } from "bullmq";
+import { config } from "../../config/config";
 
 export const redisOptions = {
-  port: 6223,
-  host: 'localhost',
-  password: 'eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81',
+  port: config.REDIS_PORT,
+  host: config.REDIS_HOST,
+  password: config.REDIS_PASSWORD,
   db: 2,
 };
 
@@ -14,7 +15,7 @@ const queueGame = (queueTitle: string) => {
 }
 
 const bullMqNotificationListener = (queueTitle: string) => {
-  return new Worker(queueTitle, async (job: Job) => {},  {
+  return new Worker(queueTitle, async (job: Job) => { }, {
     connection: redisOptions
   });
 }
