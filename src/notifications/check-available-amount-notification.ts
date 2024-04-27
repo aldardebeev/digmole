@@ -21,14 +21,15 @@ export class CheckAvailableAmountNotification {
 
     async handle(job: Job, conversation: Conversation<CustomContext>) {
         if (job.data.isLink) {
-            job.data.availableAmount
-                ? this.bot.api.sendMessage(job.data.chatId, "Выберите ставку", { reply_markup: GameBetKeyboard })
-
-                : await this.bot.api.sendMessage(job.data.chatId, `Для запуска игры необходимо пополнить доступный баланс на 100 ROD
+            if (job.data.availableAmount) {
+                this.bot.api.sendMessage(job.data.chatId, "Выберите ставку", { reply_markup: GameBetKeyboard })
+            } else {
+                await this.bot.api.sendMessage(job.data.chatId, `Для запуска игры необходимо пополнить доступный баланс на 100 ROD
 Для этого переведите токены ROD с вашего привязанного торгового адреса на следующий 👇:`,)
-            await this.bot.api.sendMessage(job.data.chatId, config.HOT_ADDRESS)
-            await this.bot.api.sendMessage(job.data.chatId, `🔴 ВНИМАНИЕ! переводите монеты только из привязанного кошелька UMI Wallet.
+                await this.bot.api.sendMessage(job.data.chatId, config.HOT_ADDRESS)
+                await this.bot.api.sendMessage(job.data.chatId, `🔴 ВНИМАНИЕ! переводите монеты только из привязанного кошелька UMI Wallet.
 НЕ ПЕРЕВОДИТЕ монеты с биржи sigen.pro напрямую в игру`, { reply_markup: notAwailableAmountKeyboard })
+            }
 
         } else {
             this.bot.api.sendMessage(job.data.chatId, notLinkWalletGameText, { reply_markup: NotLinkWalletKeyboard, });

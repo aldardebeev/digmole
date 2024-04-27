@@ -53,9 +53,9 @@ gameModule.hears(EMainKeyaboard.RULE_GAME, async (ctx) => {
 
 const callbackQueries = [
   ECalbackQuery.START_GAME100,
-  ECalbackQuery.START_GAME300,
   ECalbackQuery.START_GAME500,
-  ECalbackQuery.START_GAME1000
+  ECalbackQuery.START_GAME1000,
+  ECalbackQuery.START_GAME3000
 ];
 
 gameModule.callbackQuery(callbackQueries, async (ctx) => {

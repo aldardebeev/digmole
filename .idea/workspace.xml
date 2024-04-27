@@ -17,6 +17,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -30,13 +31,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop",
     "last_opened_file_path": "/home/debeev_aldar@geos.local/WebstormProjects/jack/tg-bot",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
-    "ts.external.directory.path": "/home/debeev_aldar@geos.local/.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/241.14494.235/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/home/debeev_aldar@geos.local/WebstormProjects/jack/tg-bot/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -58,6 +60,7 @@
       <workItem from="1714114423481" duration="367000" />
       <workItem from="1714205540507" duration="109000" />
       <workItem from="1714205941745" duration="89000" />
+      <workItem from="1714206031862" duration="322000" />
     </task>
     <task id="LOCAL-00001" summary="develop merge master">
       <option name="closed" value="true" />
@@ -75,7 +78,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714114703690</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="develop merge master">
+      <option name="closed" value="true" />
+      <created>1714206117105</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714206117105</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
