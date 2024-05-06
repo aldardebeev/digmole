@@ -3,7 +3,6 @@ export enum ECalbackQuery {
     LINK_WALLET = 'link-wallet',
     WITHDRAWAL = 'withdrawal',
     INPUT = 'input',
-    CREATE_GAME1 = '1',
     CREATE_GAME100 = '100',
     CREATE_GAME500 = '500',
     CREATE_GAME1000 = '1000',

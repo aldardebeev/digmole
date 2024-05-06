@@ -24,7 +24,6 @@ gameModule.hears(EMainKeyaboard.RULE_GAME, async (ctx) => {
 });
 
 const callbackQueries = [
-  ECalbackQuery.CREATE_GAME1,
   ECalbackQuery.CREATE_GAME100,
   ECalbackQuery.CREATE_GAME500,
   ECalbackQuery.CREATE_GAME1000,
