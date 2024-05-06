@@ -6,14 +6,13 @@ import {
     type Conversation,
 } from "@grammyjs/conversations";
 
-export class BalanceNotification {
-    private readonly messageType = 'balance';
+export class GameExistNotification {
+    private readonly messageType = 'gameExist';
     constructor(private readonly bot: Bot<CustomContext, Api<RawApi>>, private readonly notificationWorker: NotificationWorker) {
         notificationWorker.subscribe(this.messageType, this.handle.bind(this));
     }
 
     async handle(job: Job, conversation: Conversation<CustomContext>) {
-        console.log(job.data)
-        this.bot.api.sendMessage(job.data.chatId, `Ваш баланс: ${job.data.amount} ROD`,);
+        this.bot.api.sendMessage(job.data.chatId, `Уже создана игра со ставкой: ${job.data.amount} ROD`,);
     }
 }

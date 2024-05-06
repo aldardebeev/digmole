@@ -5,7 +5,6 @@ import { queueGame } from "../queues/queues";
 import { EQueue } from "../../libs/queues/queue.enum";
 import { randomUUID } from "crypto";
 import { ECalbackQuery } from "../../libs/callback-query-enum";
-import { Conversation, createConversation } from "@grammyjs/conversations";
 
 const walletModule = new Composer<CustomContext>();
 

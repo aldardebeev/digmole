@@ -10,6 +10,7 @@ import {
 import { EMainKeyaboard } from "../../libs/keyboards/main-keyboard.enum";
 import { ECalbackQuery } from "../../libs/callback-query-enum";
 import { number } from "zod";
+import { config } from "../../config/config";
 
 
 const withdrawalModule = new Composer<CustomContext>();
@@ -40,7 +41,7 @@ withdrawalModule.callbackQuery(ECalbackQuery.WITHDRAWAL, async (ctx) => {
 })
 
 withdrawalModule.callbackQuery(ECalbackQuery.INPUT, async (ctx) => {
-    await ctx.reply('rod1d5we29rhpwmy5anrua3sdr78e7zhr38qav7yty7fjn3709j4kzvqt975em', {});
+    await ctx.reply(config.HOT_ADDRESS, {});
     await ctx.answerCallbackQuery();
 })
 

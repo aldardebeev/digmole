@@ -12,7 +12,7 @@ export class NotificationWorker {
 
     private async handle(job: Job): Promise<void> {
         const callbacks = this.subscribersMap[job.data.messageType];
-        console.log(this.subscribersMap, callbacks);
+        // console.log(this.subscribersMap, callbacks);
         for (const callback of callbacks) {
             await callback(job);
         }

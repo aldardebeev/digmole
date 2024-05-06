@@ -18,6 +18,10 @@ import { CheckAvailableAmountNotification } from "./notifications/check-availabl
 import { NotEnoughTokensNotification } from "./notifications/not-enough-tokens-notification";
 import { WithdrawalNotification } from "./notifications/withdrawal-notification";
 import { GameResultNotification } from "./notifications/game-result-notification";
+import { GameListNotification } from "./notifications/game-list-notification";
+import { GameIsOverNotification } from "./notifications/game-is-over-notification";
+import { CreateGameNotification } from "./notifications/create-game-notification";
+import { GameExistNotification } from "./notifications/game-exist-notification";
 
 
 async function bootstrap() {
@@ -33,6 +37,10 @@ async function bootstrap() {
   const notEnoughTokensNotification = new NotEnoughTokensNotification(bot, notificationWorker);
   const withdarawalNotification = new WithdrawalNotification(bot, notificationWorker);
   const gameResultNotification = new GameResultNotification(bot, notificationWorker);
+  const gameListNotification = new GameListNotification(bot, notificationWorker);
+  const gameIsOverNotification = new GameIsOverNotification(bot, notificationWorker);
+  const createGameNotification = new CreateGameNotification(bot, notificationWorker);
+  const gameExistNotification = new GameExistNotification(bot, notificationWorker);
   
   setupI18N(bot);
   setupSession(bot, redisOptions);

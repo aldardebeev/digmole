@@ -19,9 +19,11 @@ async function askWallet(conversation: Conversation<CustomContext>, ctx: CustomC
 
     const messageWithAddress = await conversation.waitForHears(rodRegExp);
     
+    
     if (ctx.chat && messageWithAddress.message?.text) {
         conversation.external(async () => {
-            await queueGame(EQueue.START_BOT).add(randomUUID(), { chatId: ctx.chat!.id, username: ctx.from?.username, address: messageWithAddress.message?.text });
+            const username = !ctx.from?.username ? 'No username' : ctx.from?.username;
+            await queueGame(EQueue.START_BOT).add(randomUUID(), { chatId: ctx.chat!.id, username: username, address: messageWithAddress.message?.text });
         });
     }
 
