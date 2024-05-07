@@ -1,6 +1,8 @@
+import { I18n } from '@grammyjs/i18n';
+
 export enum EMainKeyaboard {
-  CREATE_GAME = 'Создать игру',
-  FIND_GAME = 'Найти игру',
-  WALLET = '💰Кошелёк',
-  RULE_GAME = '📕Правила игры',
+  LANGUAGE = 'Language (Ru/En)',
+  DESCRIPTION = 'Game description',
+  START_GAME = 'Starting the game',
+  INVITE_FRIENDS = 'Invite friends',
 }

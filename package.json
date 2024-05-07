@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "volta": {
-    "node": "18.18.0",
+    "node": "20.12.2",
     "yarn": "1.22.21"
   },
   "devDependencies": {

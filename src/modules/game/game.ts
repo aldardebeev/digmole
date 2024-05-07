@@ -11,15 +11,17 @@ import { RuleGameText } from "../../libs/texts/rule-game-text";
 
 const gameModule = new Composer<CustomContext>();
 
-gameModule.hears(EMainKeyaboard.CREATE_GAME, async (ctx) => {
+gameModule.hears(EMainKeyaboard.LANGUAGE, async (ctx) => {
   await queueGame(EQueue.AVAILABLE_AMOUNT).add(randomUUID(), { chatId: ctx.chat!.id });
 });
 
-gameModule.hears(EMainKeyaboard.FIND_GAME, async (ctx) => {
-  await queueGame(EQueue.FIND_GAME).add(randomUUID(), { chatId: ctx.chat!.id });
+gameModule.hears(EMainKeyaboard.DESCRIPTION, async (ctx) => {
+  ctx.reply(ctx.t('description'))
 });
-
-gameModule.hears(EMainKeyaboard.RULE_GAME, async (ctx) => {
+gameModule.on('message', async (ctx) => {
+  console.log( ctx.message);
+})
+gameModule.hears(EMainKeyaboard.START_GAME, async (ctx) => {
   await ctx.reply(RuleGameText)
 });
 

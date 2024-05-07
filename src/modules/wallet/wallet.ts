@@ -8,7 +8,7 @@ import { ECalbackQuery } from "../../libs/callback-query-enum";
 
 const walletModule = new Composer<CustomContext>();
 
-walletModule.hears(EMainKeyaboard.WALLET, async (ctx) => {
+walletModule.hears(EMainKeyaboard.INVITE_FRIENDS, async (ctx) => {
    await queueGame(EQueue.EXISTS_WALLET).add(randomUUID(), { chatId: ctx.chat!.id });
 })
 
